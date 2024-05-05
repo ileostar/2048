@@ -3,44 +3,25 @@ defineOptions({
   name: 'IndexPage',
 })
 
-const name = ref('')
-
-const router = useRouter()
-function go() {
-  if (name.value)
-    router.push(`/hi/${encodeURIComponent(name.value)}`)
-}
+const gameScene = ref([
+  [0, 0, 0, 2],
+  [0, 0, 0, 2],
+  [0, 0, 0, 2],
+  [0, 0, 0, 2],
+])
 </script>
 
 <template>
-  <div>
-    <div i-carbon-campsite inline-block text-4xl />
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse-lite" target="_blank">
-        Vitesse Lite
-      </a>
-    </p>
-    <p>
-      <em text-sm op75>Opinionated Vite Starter Template</em>
-    </p>
-
-    <div py-4 />
-
-    <TheInput
-      v-model="name"
-      placeholder="What's your name?"
-      autocomplete="false"
-      @keydown.enter="go"
-    />
-
-    <div>
-      <button
-        class="m-3 text-sm btn"
-        :disabled="!name"
-        @click="go"
-      >
-        Go
-      </button>
+  <div flex="~ col" items-center justify-center>
+    <h1 my5 text-4xl font-bold>
+      2048
+    </h1>
+    <div border="2 solid gray-500/30" flex="~ col" gap-1 rd-1 p1>
+      <div v-for="x, i in gameScene" :key="i" flex gap-1>
+        <div v-for="y, k in x" :key="k" bg="gray-500/30" h-18 w-18 flex items-center justify-center rd-1 text-2xl>
+          {{ y }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
